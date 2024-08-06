@@ -1,6 +1,7 @@
 package add
 
 import (
+	"github.com/mooncake9527/x/xerrors/xerror"
 	"os"
 	"path/filepath"
 )
