@@ -125,3 +125,15 @@ func (r *Repo) CopyToV2(ctx context.Context, to string, modPath string, ignores,
 	replaces = append([]string{mod, modPath}, replaces...)
 	return copyDir(r.Path(), to, replaces, ignores)
 }
+
+func (r *Repo) CopyToV3(ctx context.Context, to string, modPath string, ignores, replaces []string) error {
+	if err := r.Clone(ctx); err != nil {
+		return err
+	}
+	mod, err := ModulePath(filepath.Join(r.Path(), "go.mod"))
+	if err != nil {
+		return err
+	}
+	replaces = append([]string{mod, modPath}, replaces...)
+	return copyDir(r.Path(), to, replaces, ignores)
+}

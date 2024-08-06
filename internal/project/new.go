@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/fatih/color"
@@ -39,11 +40,15 @@ func (p *Project) New(ctx context.Context, dir string, layout string, branch str
 	}
 	fmt.Printf("🚀 Creating service %s, layout repo is %s, please wait a moment.\n\n", p.Name, layout)
 	repo := base.NewRepo(layout, branch)
-	if err := repo.CopyTo(ctx, to, p.Name, []string{".git", ".github"}); err != nil {
+	//if err := repo.CopyTo(ctx, to, p.Name, []string{".git", ".github"}); err != nil {
+	projectName := title(p.Name)
+	if err := repo.CopyToV2(ctx, to, p.Name, []string{".git", ".github"}, []string{
+		"company", p.Name, "Company", projectName,
+	}); err != nil {
 		return err
 	}
 	e := os.Rename(
-		filepath.Join(to, "cmd", "server"),
+		filepath.Join(to, "cmd", "company"),
 		filepath.Join(to, "cmd", p.Name),
 	)
 	if e != nil {
@@ -61,4 +66,19 @@ func (p *Project) New(ctx context.Context, dir string, layout string, branch str
 	fmt.Println("			🤝 Thanks for using XT")
 	fmt.Println("	📚 Tutorial: https://go-xt.dev/docs/getting-started/start")
 	return nil
+}
+
+func title(s string) string {
+	if s == "" {
+		return s
+	}
+	// 将字符串按空格分割成单词切片
+	words := strings.Fields(s)
+	for i, word := range words {
+		r := []rune(word)
+		w := strings.ToUpper(string(r[0])) + string(r[1:])
+		words[i] = w
+	}
+	// 将单词切片重新连接成字符串
+	return strings.Join(words, " ")
 }

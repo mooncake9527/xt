@@ -46,7 +46,7 @@ func (p *Project) Add(ctx context.Context, dir string, layout string, branch str
 	}
 
 	e := os.Rename(
-		filepath.Join(to, "cmd", "server"),
+		filepath.Join(to, "cmd", "company"),
 		filepath.Join(to, "cmd", p.Name),
 	)
 	if e != nil {
