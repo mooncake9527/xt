@@ -3,6 +3,7 @@ package base
 import (
 	"context"
 	"fmt"
+	"github.com/mooncake9527/x/xerrors/xerror"
 	"net"
 	"os"
 	"os/exec"
@@ -95,7 +96,7 @@ func (r *Repo) Clone(ctx context.Context) error {
 	out, err := cmd.CombinedOutput()
 	fmt.Println(string(out))
 	if err != nil {
-		return err
+		return xerror.New(err.Error())
 	}
 	return nil
 }

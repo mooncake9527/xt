@@ -3,6 +3,7 @@ package base
 import (
 	"bytes"
 	"fmt"
+	"github.com/mooncake9527/x/xerrors/xerror"
 	"log"
 	"os"
 	"path/filepath"
@@ -38,11 +39,11 @@ func xtHomeWithDir(dir string) string {
 func copyFile(src, dst string, replaces []string) error {
 	srcinfo, err := os.Stat(src)
 	if err != nil {
-		return err
+		return xerror.New(err.Error())
 	}
 	buf, err := os.ReadFile(src)
 	if err != nil {
-		return err
+		return xerror.New(err.Error())
 	}
 	var old string
 	for i, next := range replaces {
@@ -58,17 +59,17 @@ func copyFile(src, dst string, replaces []string) error {
 func copyDir(src, dst string, replaces, ignores []string) error {
 	srcinfo, err := os.Stat(src)
 	if err != nil {
-		return err
+		return xerror.New(err.Error())
 	}
 
 	err = os.MkdirAll(dst, srcinfo.Mode())
 	if err != nil {
-		return err
+		return xerror.New(err.Error())
 	}
 
 	fds, err := os.ReadDir(src)
 	if err != nil {
-		return err
+		return xerror.New(err.Error())
 	}
 	for _, fd := range fds {
 		if hasSets(fd.Name(), ignores) {
@@ -83,7 +84,7 @@ func copyDir(src, dst string, replaces, ignores []string) error {
 			e = copyFile(srcfp, dstfp, replaces)
 		}
 		if e != nil {
-			return e
+			return xerror.New(e.Error())
 		}
 	}
 	return nil

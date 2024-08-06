@@ -1,7 +1,6 @@
 package add
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -34,7 +33,7 @@ func (p *Proto) Generate() error {
 	}
 	name := filepath.Join(to, p.Name)
 	if _, err := os.Stat(name); !os.IsNotExist(err) {
-		return fmt.Errorf("%s already exists", p.Name)
+		return xerror.Newf("%s already exists", p.Name)
 	}
 	return os.WriteFile(name, body, 0o644)
 }

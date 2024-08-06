@@ -3,6 +3,7 @@ package base
 import (
 	"bufio"
 	"bytes"
+	"github.com/mooncake9527/x/xerrors/xerror"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -15,7 +16,7 @@ import (
 func ModulePath(filename string) (string, error) {
 	modBytes, err := os.ReadFile(filename)
 	if err != nil {
-		return "", err
+		return "", xerror.New(err.Error())
 	}
 	return modfile.ModulePath(modBytes), nil
 }

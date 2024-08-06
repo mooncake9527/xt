@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/mooncake9527/x/xerrors/xerror"
 	"os"
 	"path/filepath"
 	"strings"
@@ -75,20 +76,20 @@ func run(_ *cobra.Command, args []string) {
 		}
 		projectRoot := getgomodProjectRoot(workingDir)
 		if gomodIsNotExistIn(projectRoot) {
-			done <- fmt.Errorf("🚫 go.mod don't exists in %s", projectRoot)
+			done <- xerror.Newf("🚫 go.mod don't exists in %s", projectRoot)
 			return
 		}
 
 		packagePath, e := filepath.Rel(projectRoot, filepath.Join(workingDir, projectName))
 		if e != nil {
-			done <- fmt.Errorf("🚫 failed to get relative path: %v", err)
+			done <- xerror.Newf("🚫 failed to get relative path: %v", err)
 			return
 		}
 		packagePath = strings.ReplaceAll(packagePath, "\\", "/")
 
 		mod, e := base.ModulePath(filepath.Join(projectRoot, "go.mod"))
 		if e != nil {
-			done <- fmt.Errorf("🚫 failed to parse `go.mod`: %v", e)
+			done <- xerror.Newf("🚫 failed to parse `go.mod`: %v", e)
 			return
 		}
 		// Get the relative path for adding a project based on Go modules
@@ -101,10 +102,10 @@ func run(_ *cobra.Command, args []string) {
 			fmt.Fprint(os.Stderr, "\033[31mERROR: project creation timed out\033[m\n")
 			return
 		}
-		fmt.Fprintf(os.Stderr, "\033[31mERROR: failed to create project(%s)\033[m\n", ctx.Err().Error())
+		fmt.Fprintf(os.Stderr, "\033[31mERROR: failed to create project(%+v)\033[m\n", ctx.Err())
 	case err = <-done:
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "\033[31mERROR: Failed to create project(%s)\033[m\n", err.Error())
+			fmt.Fprintf(os.Stderr, "\033[31mERROR: Failed to create project(%+v)\033[m\n", err)
 		}
 	}
 }
