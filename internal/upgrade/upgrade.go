@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/go-xt/xt/cmd/xt/v2/internal/base"
+	"github.com/mooncake9527/xt/internal/base"
 )
 
 // CmdUpgrade represents the upgrade command.
@@ -19,7 +19,7 @@ var CmdUpgrade = &cobra.Command{
 // Run upgrade the xt tools.
 func Run(_ *cobra.Command, _ []string) {
 	err := base.GoInstall(
-		"github.com/go-xt/xt/cmd/xt/v2@latest",
+		"github.com/mooncake9527/xt@latest",
 		"github.com/go-xt/xt/cmd/protoc-gen-go-http/v2@latest",
 		"github.com/go-xt/xt/cmd/protoc-gen-go-errors/v2@latest",
 		"google.golang.org/protobuf/cmd/protoc-gen-go@latest",

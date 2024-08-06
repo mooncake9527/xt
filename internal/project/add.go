@@ -9,7 +9,7 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/fatih/color"
 
-	"github.com/go-xt/xt/cmd/xt/v2/internal/base"
+	"github.com/mooncake9527/xt/internal/base"
 )
 
 var repoAddIgnores = []string{

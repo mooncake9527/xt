@@ -12,7 +12,7 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/spf13/cobra"
 
-	"github.com/go-xt/xt/cmd/xt/v2/internal/base"
+	"github.com/mooncake9527/xt/internal/base"
 )
 
 // CmdNew represents the new command.

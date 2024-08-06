@@ -10,7 +10,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/go-xt/xt/cmd/xt/v2/internal/base"
+	"github.com/mooncake9527/xt/internal/base"
 )
 
 // CmdClient represents the source command.

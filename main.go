@@ -5,11 +5,11 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/go-xt/xt/cmd/xt/v2/internal/change"
-	"github.com/go-xt/xt/cmd/xt/v2/internal/project"
-	"github.com/go-xt/xt/cmd/xt/v2/internal/proto"
-	"github.com/go-xt/xt/cmd/xt/v2/internal/run"
-	"github.com/go-xt/xt/cmd/xt/v2/internal/upgrade"
+	"github.com/mooncake9527/xt/internal/change"
+	"github.com/mooncake9527/xt/internal/project"
+	"github.com/mooncake9527/xt/internal/proto"
+	"github.com/mooncake9527/xt/internal/run"
+	"github.com/mooncake9527/xt/internal/upgrade"
 )
 
 var rootCmd = &cobra.Command{

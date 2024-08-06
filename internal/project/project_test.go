@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/go-xt/xt/cmd/xt/v2/internal/base"
+	"github.com/mooncake9527/xt/internal/base"
 )
 
 // TestCmdNew tests the `xt new` command.

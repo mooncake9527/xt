@@ -3,9 +3,9 @@ package proto
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/go-xt/xt/cmd/xt/v2/internal/proto/add"
-	"github.com/go-xt/xt/cmd/xt/v2/internal/proto/client"
-	"github.com/go-xt/xt/cmd/xt/v2/internal/proto/server"
+	"github.com/mooncake9527/xt/internal/proto/add"
+	"github.com/mooncake9527/xt/internal/proto/client"
+	"github.com/mooncake9527/xt/internal/proto/server"
 )
 
 // CmdProto represents the proto command.

@@ -1,6 +1,6 @@
-module github.com/go-xt/xt/cmd/xt/v2
+module github.com/mooncake9527/xt
 
-go 1.19
+go 1.22
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.7
