@@ -33,7 +33,8 @@ var (
 
 func init() {
 	if repoURL = os.Getenv("XT_LAYOUT_REPO"); repoURL == "" {
-		repoURL = "https://gitee.com/achilles2018/xt-layout.git\n"
+		//repoURL = "https://github.com/mooncake9527/xt_layout.git"
+		repoURL = "https://gitee.com/achilles2018/xt-layout.git"
 	}
 	timeout = "60s"
 	CmdNew.Flags().StringVarP(&repoURL, "repo-url", "r", repoURL, "layout repo")
