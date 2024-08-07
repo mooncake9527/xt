@@ -40,7 +40,7 @@ func (p *Project) Add(ctx context.Context, dir string, layout string, branch str
 
 	pkgPath = fmt.Sprintf("%s/%s", mod, pkgPath)
 	repo := base.NewRepo(layout, branch)
-	err := repo.CopyToV2(ctx, to, pkgPath, repoAddIgnores, []string{filepath.Join(p.Path, "api"), "api"})
+	err := repo.CopyToV2(ctx, to, pkgPath, repoAddIgnores, []string{filepath.Join(p.Path, "api"), "api"}, notReplace)
 	if err != nil {
 		return err
 	}

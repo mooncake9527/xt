@@ -19,6 +19,10 @@ type Project struct {
 	Path string
 }
 
+var (
+	notReplace = []string{".template", "command/const.go"}
+)
+
 // New new a project from remote repo.
 func (p *Project) New(ctx context.Context, dir string, layout string, branch string) error {
 	to := filepath.Join(dir, p.Name)
@@ -44,7 +48,7 @@ func (p *Project) New(ctx context.Context, dir string, layout string, branch str
 	projectName := title(p.Name)
 	if err := repo.CopyToV2(ctx, to, p.Name, []string{".git", ".github"}, []string{
 		"company", p.Name, "Company", projectName,
-	}); err != nil {
+	}, notReplace); err != nil {
 		return err
 	}
 	e := os.Rename(

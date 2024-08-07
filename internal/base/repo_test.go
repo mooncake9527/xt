@@ -42,7 +42,7 @@ func TestRepoClone(t *testing.T) {
 	if err := r.Clone(context.Background()); err != nil {
 		t.Fatal(err)
 	}
-	if err := r.CopyTo(context.Background(), "/tmp/test_repo", "github.com/go-xt/xt-layout", nil); err != nil {
+	if err := r.CopyTo(context.Background(), "/tmp/test_repo", "github.com/go-xt/xt-layout", nil, nil); err != nil {
 		t.Fatal(err)
 	}
 	t.Cleanup(func() {

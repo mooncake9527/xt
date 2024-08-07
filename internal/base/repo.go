@@ -102,7 +102,7 @@ func (r *Repo) Clone(ctx context.Context) error {
 }
 
 // CopyTo copies the repository to project path.
-func (r *Repo) CopyTo(ctx context.Context, to string, modPath string, ignores []string) error {
+func (r *Repo) CopyTo(ctx context.Context, to string, modPath string, ignores []string, notReplace []string) error {
 	if err := r.Clone(ctx); err != nil {
 		return err
 	}
@@ -110,11 +110,11 @@ func (r *Repo) CopyTo(ctx context.Context, to string, modPath string, ignores []
 	if err != nil {
 		return err
 	}
-	return copyDir(r.Path(), to, []string{mod, modPath}, ignores)
+	return copyDir(r.Path(), to, []string{mod, modPath}, ignores, notReplace)
 }
 
 // CopyToV2 copies the repository to project path
-func (r *Repo) CopyToV2(ctx context.Context, to string, modPath string, ignores, replaces []string) error {
+func (r *Repo) CopyToV2(ctx context.Context, to string, modPath string, ignores, replaces []string, notReplace []string) error {
 	if err := r.Clone(ctx); err != nil {
 		return err
 	}
@@ -123,10 +123,10 @@ func (r *Repo) CopyToV2(ctx context.Context, to string, modPath string, ignores,
 		return err
 	}
 	replaces = append([]string{mod, modPath}, replaces...)
-	return copyDir(r.Path(), to, replaces, ignores)
+	return copyDir(r.Path(), to, replaces, ignores, notReplace)
 }
 
-func (r *Repo) CopyToV3(ctx context.Context, to string, modPath string, ignores, replaces []string) error {
+func (r *Repo) CopyToV3(ctx context.Context, to string, modPath string, ignores, replaces []string, notReplace []string) error {
 	if err := r.Clone(ctx); err != nil {
 		return err
 	}
@@ -135,5 +135,5 @@ func (r *Repo) CopyToV3(ctx context.Context, to string, modPath string, ignores,
 		return err
 	}
 	replaces = append([]string{mod, modPath}, replaces...)
-	return copyDir(r.Path(), to, replaces, ignores)
+	return copyDir(r.Path(), to, replaces, ignores, notReplace)
 }

@@ -36,7 +36,7 @@ func xtHomeWithDir(dir string) string {
 	return home
 }
 
-func copyFile(src, dst string, replaces []string) error {
+func copyFile(src, dst string, replaces []string, notReplace []string) error {
 	srcinfo, err := os.Stat(src)
 	if err != nil {
 		return xerror.New(err.Error())
@@ -45,18 +45,32 @@ func copyFile(src, dst string, replaces []string) error {
 	if err != nil {
 		return xerror.New(err.Error())
 	}
-	var old string
-	for i, next := range replaces {
-		if i%2 == 0 {
-			old = next
-			continue
+
+	if !isIn(src, notReplace) {
+		var old string
+		for i, next := range replaces {
+			if i%2 == 0 {
+				old = next
+				continue
+			}
+			buf = bytes.ReplaceAll(buf, []byte(old), []byte(next))
 		}
-		buf = bytes.ReplaceAll(buf, []byte(old), []byte(next))
 	}
+
 	return os.WriteFile(dst, buf, srcinfo.Mode())
 }
 
-func copyDir(src, dst string, replaces, ignores []string) error {
+func isIn(r string, rs []string) bool {
+	is := false
+	for _, v := range rs {
+		if strings.Contains(r, v) {
+			is = true
+		}
+	}
+	return is
+}
+
+func copyDir(src, dst string, replaces, ignores []string, notReplace []string) error {
 	srcinfo, err := os.Stat(src)
 	if err != nil {
 		return xerror.New(err.Error())
@@ -79,9 +93,9 @@ func copyDir(src, dst string, replaces, ignores []string) error {
 		dstfp := filepath.Join(dst, fd.Name())
 		var e error
 		if fd.IsDir() {
-			e = copyDir(srcfp, dstfp, replaces, ignores)
+			e = copyDir(srcfp, dstfp, replaces, ignores, notReplace)
 		} else {
-			e = copyFile(srcfp, dstfp, replaces)
+			e = copyFile(srcfp, dstfp, replaces, notReplace)
 		}
 		if e != nil {
 			return xerror.New(e.Error())
