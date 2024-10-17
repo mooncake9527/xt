@@ -47,12 +47,12 @@ func (p *Project) New(ctx context.Context, dir string, layout string, branch str
 	//if err := repo.CopyTo(ctx, to, p.Name, []string{".git", ".github"}); err != nil {
 	projectName := title(p.Name)
 	if err := repo.CopyToV2(ctx, to, p.Name, []string{".git", ".github"}, []string{
-		"company", p.Name, "Company", projectName,
+		"xt-layout", p.Name, "Xt-layout", projectName,
 	}, notReplace); err != nil {
 		return err
 	}
 	e := os.Rename(
-		filepath.Join(to, "cmd", "company"),
+		filepath.Join(to, "cmd", "xt-layout"),
 		filepath.Join(to, "cmd", p.Name),
 	)
 	if e != nil {

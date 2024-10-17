@@ -4,11 +4,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/mooncake9527/x/xerrors/xerror"
 	"os"
 	"path/filepath"
 	"strings"
 	"time"
+
+	"github.com/mooncake9527/x/xerrors/xerror"
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/spf13/cobra"
@@ -33,8 +34,8 @@ var (
 
 func init() {
 	if repoURL = os.Getenv("XT_LAYOUT_REPO"); repoURL == "" {
-		//repoURL = "https://github.com/mooncake9527/xt_layout.git"
-		repoURL = "https://gitee.com/achilles2018/xt-layout.git"
+		// repoURL = "https://gitee.com/achilles2018/xt-layout.git"
+		repoURL = "https://gitee.com/achilles2018/orange.git"
 	}
 	timeout = "60s"
 	CmdNew.Flags().StringVarP(&repoURL, "repo-url", "r", repoURL, "layout repo")
