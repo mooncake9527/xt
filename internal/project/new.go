@@ -47,7 +47,7 @@ func (p *Project) New(ctx context.Context, dir string, layout string, branch str
 	//if err := repo.CopyTo(ctx, to, p.Name, []string{".git", ".github"}); err != nil {
 	projectName := title(p.Name)
 	if err := repo.CopyToV2(ctx, to, p.Name, []string{".git", ".github"}, []string{
-		"xt-layout", p.Name, "Xt-layout", projectName,
+		"orange", p.Name, "Orange", projectName,
 	}, notReplace); err != nil {
 		return err
 	}
